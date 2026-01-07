@@ -42,7 +42,8 @@ export const Footer = () => {
               <motion.img 
                 src="/logo.png" 
                 alt="Locrave" 
-                className="h-8 w-8"
+                className="h-8 w-8 object-contain"
+                style={{ mixBlendMode: 'multiply' }}
                 whileHover={{ rotate: 360, scale: 1.1 }}
                 transition={{ duration: 0.5 }}
               />

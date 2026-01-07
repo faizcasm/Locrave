@@ -19,7 +19,7 @@ export const Hero = () => {
       <motion.div 
         className="absolute inset-0 opacity-50"
         style={{
-          background: 'linear-gradient(135deg, #4DB6AC 0%, #81C784 50%, #4FC3F7 100%)',
+          background: 'linear-gradient(135deg, #6366F1 0%, #A855F7 50%, #F43F5E 100%)',
           backgroundSize: '300% 300%'
         }}
         animate={{
@@ -36,7 +36,7 @@ export const Hero = () => {
       <motion.div className="absolute inset-0 overflow-hidden" style={{ y }}>
         <motion.div
           className="absolute top-20 left-10 w-64 h-64 rounded-full opacity-30 blur-3xl"
-          style={{ background: 'radial-gradient(circle, #4DB6AC 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, #6366F1 0%, transparent 70%)' }}
           animate={{
             y: [0, -20, 0],
             scale: [1, 1.1, 1],
@@ -49,7 +49,7 @@ export const Hero = () => {
         />
         <motion.div
           className="absolute bottom-20 right-10 w-80 h-80 rounded-full opacity-30 blur-3xl"
-          style={{ background: 'radial-gradient(circle, #81C784 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(circle, #A855F7 0%, transparent 70%)' }}
           animate={{
             y: [0, 20, 0],
             scale: [1, 1.15, 1],
@@ -63,7 +63,7 @@ export const Hero = () => {
         <motion.div
           className="absolute top-1/2 left-1/2 w-96 h-96 rounded-full opacity-20 blur-3xl"
           style={{ 
-            background: 'radial-gradient(circle, #4FC3F7 0%, transparent 70%)',
+            background: 'radial-gradient(circle, #F43F5E 0%, transparent 70%)',
             transform: 'translate(-50%, -50%)'
           }}
           animate={{

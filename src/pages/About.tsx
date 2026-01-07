@@ -147,7 +147,7 @@ export const About = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-20 bg-gradient-to-br from-primary via-mint to-ocean">
+        <section className="py-20 bg-gradient-to-br from-primary via-secondary to-accent">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <AnimatedSection>
               <h2 className="text-4xl font-bold text-white mb-6">

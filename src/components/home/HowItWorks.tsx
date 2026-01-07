@@ -27,7 +27,7 @@ export const HowItWorks = () => {
       {/* Animated background elements */}
       <motion.div
         className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-10"
-        style={{ background: 'radial-gradient(circle, #4DB6AC 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, #6366F1 0%, transparent 70%)' }}
         animate={{
           scale: [1, 1.2, 1],
           x: [0, 50, 0],
@@ -53,7 +53,7 @@ export const HowItWorks = () => {
         <div className="relative">
           {/* Animated connecting line */}
           <motion.div 
-            className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-mint to-ocean"
+            className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent"
             style={{ transform: 'translateY(-50%)', zIndex: 0 }}
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}

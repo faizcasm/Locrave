@@ -71,7 +71,7 @@ export const Navbar = () => {
                 {isActive(link.path) && (
                   <motion.div
                     layoutId="navbar-indicator"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-ocean"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-accent"
                     initial={false}
                     transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   />
@@ -133,7 +133,7 @@ export const Navbar = () => {
               className="md:hidden overflow-hidden"
             >
               <motion.div 
-                className="flex flex-col space-y-4 pb-4"
+                className="flex flex-col space-y-4 pb-4 px-4 py-4 bg-white/90 backdrop-blur-xl rounded-xl shadow-lg mt-2 border border-white/20"
                 initial="closed"
                 animate="open"
                 exit="closed"

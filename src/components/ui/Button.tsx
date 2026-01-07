@@ -23,8 +23,8 @@ export const Button = ({
   const baseClasses = 'px-6 py-3 rounded-full font-semibold transition-all duration-200 inline-block relative overflow-hidden';
   
   const variantClasses = {
-    primary: 'bg-gradient-to-r from-primary to-ocean text-white hover:shadow-lg hover:shadow-primary/30',
-    secondary: 'bg-mint text-white hover:shadow-lg hover:shadow-mint/30',
+    primary: 'bg-gradient-to-r from-primary to-accent text-white hover:shadow-lg hover:shadow-primary/30',
+    secondary: 'bg-secondary text-white hover:shadow-lg hover:shadow-secondary/30',
     outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white'
   };
 

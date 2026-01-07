@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useRef } from 'react';
 
 interface ButtonProps {
   children: ReactNode;
@@ -17,6 +17,7 @@ export const Button = ({
   className = ''
 }: ButtonProps) => {
   const [ripples, setRipples] = useState<{ x: number; y: number; id: number }[]>([]);
+  const rippleIdCounter = useRef(0);
   
   const baseClasses = 'px-6 py-3 rounded-full font-semibold transition-all duration-200 inline-block relative overflow-hidden';
   
@@ -36,7 +37,9 @@ export const Button = ({
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     
-    const newRipple = { x, y, id: Date.now() };
+    // Use incrementing counter for unique IDs
+    rippleIdCounter.current += 1;
+    const newRipple = { x, y, id: rippleIdCounter.current };
     setRipples(prev => [...prev, newRipple]);
     
     // Remove ripple after animation

@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ReactNode, MouseEvent } from 'react';
+import { ReactNode, MouseEvent, useRef } from 'react';
 
 interface CardProps {
   children: ReactNode;
@@ -11,6 +11,7 @@ interface CardProps {
 export const Card = ({ children, className = '', hover = false, hover3D = false }: CardProps) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
+  const animationFrameRef = useRef<number | null>(null);
 
   const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
   const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
@@ -21,18 +22,29 @@ export const Card = ({ children, className = '', hover = false, hover3D = false 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!hover3D) return;
 
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
+    // Cancel any pending animation frame
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+
+    // Use requestAnimationFrame to throttle calculations
+    animationFrameRef.current = requestAnimationFrame(() => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      const xPct = mouseX / width - 0.5;
+      const yPct = mouseY / height - 0.5;
+      x.set(xPct);
+      y.set(yPct);
+    });
   };
 
   const handleMouseLeave = () => {
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
     x.set(0);
     y.set(0);
   };

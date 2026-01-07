@@ -21,12 +21,12 @@ export const AnimatedCounter = ({
     triggerOnce: true
   });
   const hasAnimated = useRef(false);
+  const animationFrameRef = useRef<number>();
 
   useEffect(() => {
     if (inView && !hasAnimated.current) {
       hasAnimated.current = true;
       let startTime: number;
-      let animationFrame: number;
 
       const animate = (timestamp: number) => {
         if (!startTime) startTime = timestamp;
@@ -34,20 +34,20 @@ export const AnimatedCounter = ({
 
         if (progress < 1) {
           setCount(Math.floor(end * progress));
-          animationFrame = requestAnimationFrame(animate);
+          animationFrameRef.current = requestAnimationFrame(animate);
         } else {
           setCount(end);
         }
       };
 
-      animationFrame = requestAnimationFrame(animate);
-
-      return () => {
-        if (animationFrame) {
-          cancelAnimationFrame(animationFrame);
-        }
-      };
+      animationFrameRef.current = requestAnimationFrame(animate);
     }
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
   }, [inView, end, duration]);
 
   return (

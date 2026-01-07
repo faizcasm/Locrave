@@ -146,13 +146,15 @@ export const counterVariant = {
 
 // Reduced motion variants (for accessibility)
 export const getReducedMotionVariants = (variants: Variants): Variants => {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  
-  if (prefersReducedMotion) {
-    return {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1, transition: { duration: 0.01 } }
-    };
+  if (typeof window !== 'undefined') {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+      return {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { duration: 0.01 } }
+      };
+    }
   }
   
   return variants;

@@ -99,7 +99,7 @@ export const Footer = () => {
                   whileHover={{ 
                     scale: 1.2, 
                     rotate: 5,
-                    color: '#4DB6AC' 
+                    color: '#6366F1' 
                   }}
                   whileTap={{ scale: 0.9 }}
                   initial={{ opacity: 0, y: 10 }}

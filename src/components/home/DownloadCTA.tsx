@@ -3,12 +3,12 @@ import { Button } from '../ui/Button';
 
 export const DownloadCTA = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-primary via-mint to-ocean relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-br from-primary via-secondary to-accent relative overflow-hidden">
       {/* Animated background elements */}
       <motion.div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(135deg, rgba(77, 182, 172, 0.3) 0%, rgba(129, 199, 132, 0.3) 50%, rgba(79, 195, 247, 0.3) 100%)',
+          background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(168, 85, 247, 0.3) 50%, rgba(244, 63, 94, 0.3) 100%)',
           backgroundSize: '400% 400%'
         }}
         animate={{

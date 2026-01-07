@@ -1,5 +1,7 @@
+import { motion } from 'framer-motion';
 import { Card } from '../ui/Card';
 import { AnimatedSection } from '../ui/AnimatedSection';
+import { staggerContainer, staggerItem } from '../../constants/animations';
 
 export const Features = () => {
   const features = [
@@ -48,19 +50,33 @@ export const Features = () => {
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+        >
           {features.map((feature, index) => (
-            <AnimatedSection key={index} delay={index * 0.1}>
-              <Card hover className="h-full">
-                <div className="text-5xl mb-4">{feature.icon}</div>
+            <motion.div key={index} variants={staggerItem}>
+              <Card hover hover3D className="h-full">
+                <motion.div 
+                  className="text-5xl mb-4"
+                  initial={{ scale: 0, rotate: -180 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, type: 'spring', stiffness: 200 }}
+                >
+                  {feature.icon}
+                </motion.div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   {feature.title}
                 </h3>
                 <p className="text-gray-600">{feature.description}</p>
               </Card>
-            </AnimatedSection>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

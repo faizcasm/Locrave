@@ -133,7 +133,7 @@ export const Navbar = () => {
               className="md:hidden overflow-hidden"
             >
               <motion.div 
-                className="flex flex-col space-y-4 pb-4 px-4 py-4 glass rounded-xl shadow-lg mt-2 bg-white/80 backdrop-blur-xl"
+                className="flex flex-col space-y-4 pb-4 px-4 py-4 bg-white/90 backdrop-blur-xl rounded-xl shadow-lg mt-2 border border-white/20"
                 initial="closed"
                 animate="open"
                 exit="closed"

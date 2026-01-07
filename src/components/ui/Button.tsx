@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ReactNode, useState, useRef } from 'react';
+import { ReactNode, useState, useRef, useEffect } from 'react';
 
 interface ButtonProps {
   children: ReactNode;
@@ -18,6 +18,7 @@ export const Button = ({
 }: ButtonProps) => {
   const [ripples, setRipples] = useState<{ x: number; y: number; id: number }[]>([]);
   const rippleIdCounter = useRef(0);
+  const timeoutRefs = useRef<Set<number>>(new Set());
   
   const baseClasses = 'px-6 py-3 rounded-full font-semibold transition-all duration-200 inline-block relative overflow-hidden';
   
@@ -28,6 +29,14 @@ export const Button = ({
   };
 
   const classes = `${baseClasses} ${variantClasses[variant]} ${className}`;
+
+  useEffect(() => {
+    // Cleanup all timeouts on unmount
+    return () => {
+      timeoutRefs.current.forEach(timeout => clearTimeout(timeout));
+      timeoutRefs.current.clear();
+    };
+  }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     if (onClick) onClick();
@@ -43,9 +52,11 @@ export const Button = ({
     setRipples(prev => [...prev, newRipple]);
     
     // Remove ripple after animation
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id));
+      timeoutRefs.current.delete(timeout);
     }, 600);
+    timeoutRefs.current.add(timeout);
   };
 
   const MotionComponent = href ? motion.a : motion.button;

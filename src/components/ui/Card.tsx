@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ReactNode, MouseEvent, useRef } from 'react';
+import { ReactNode, MouseEvent, useRef, useEffect } from 'react';
 
 interface CardProps {
   children: ReactNode;
@@ -18,6 +18,15 @@ export const Card = ({ children, className = '', hover = false, hover3D = false 
 
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['7.5deg', '-7.5deg']);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-7.5deg', '7.5deg']);
+
+  useEffect(() => {
+    // Cleanup animation frame on unmount
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, []);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!hover3D) return;

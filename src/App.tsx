@@ -1,22 +1,96 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { AnimatePresence, motion } from 'framer-motion';
+import { lazy, Suspense } from 'react';
 import { Layout } from './components/layout/Layout';
-import { Home } from './pages/Home';
-import { Features } from './pages/Features';
-import { Download } from './pages/Download';
-import { About } from './pages/About';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { ScrollProgress } from './components/ui/ScrollProgress';
+import { LoadingSpinner } from './components/ui/LoadingSpinner';
+import { pageTransition } from './constants/animations';
+
+// Lazy load pages for code splitting
+const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
+const Features = lazy(() => import('./pages/Features').then(module => ({ default: module.Features })));
+const Download = lazy(() => import('./pages/Download').then(module => ({ default: module.Download })));
+const About = lazy(() => import('./pages/About').then(module => ({ default: module.About })));
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route
+          path="/"
+          element={
+            <motion.div
+              variants={pageTransition}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <Home />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/features"
+          element={
+            <motion.div
+              variants={pageTransition}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <Features />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/download"
+          element={
+            <motion.div
+              variants={pageTransition}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <Download />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <motion.div
+              variants={pageTransition}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <About />
+            </motion.div>
+          }
+        />
+      </Routes>
+    </AnimatePresence>
+  );
+}
 
 function App() {
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/download" element={<Download />} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <HelmetProvider>
+      <ErrorBoundary>
+        <Router>
+          <ScrollProgress />
+          <Layout>
+            <Suspense fallback={<LoadingSpinner />}>
+              <AnimatedRoutes />
+            </Suspense>
+          </Layout>
+        </Router>
+      </ErrorBoundary>
+    </HelmetProvider>
   );
 }
 

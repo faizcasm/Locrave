@@ -13,6 +13,7 @@ const Home = lazy(() => import('./pages/Home').then(module => ({ default: module
 const Features = lazy(() => import('./pages/Features').then(module => ({ default: module.Features })));
 const Download = lazy(() => import('./pages/Download').then(module => ({ default: module.Download })));
 const About = lazy(() => import('./pages/About').then(module => ({ default: module.About })));
+const NotFound = lazy(() => import('./pages/NotFound').then(module => ({ default: module.NotFound })));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -69,6 +70,19 @@ function AnimatedRoutes() {
               exit="exit"
             >
               <About />
+            </motion.div>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <motion.div
+              variants={pageTransition}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <NotFound />
             </motion.div>
           }
         />

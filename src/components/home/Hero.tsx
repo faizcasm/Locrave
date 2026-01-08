@@ -174,37 +174,13 @@ export const Hero = () => {
                 }}
                 style={{ transformStyle: 'preserve-3d' }}
               >
-                <div className="w-full h-full gradient-bg rounded-[2.5rem] flex items-center justify-center overflow-hidden relative">
-                  {/* Animated gradient overlay */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"
-                    animate={{
-                      backgroundPosition: ['0% 0%', '100% 100%']
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      repeatType: 'reverse'
-                    }}
+                <div className="w-full h-full rounded-[2.5rem] flex items-center justify-center overflow-hidden relative">
+                  {/* Hero Screenshot Image */}
+                  <img 
+                    src="/IMG_20260108_173600.jpg" 
+                    alt="Locrave App Screenshot" 
+                    className="w-full h-full object-cover rounded-[2.5rem]"
                   />
-                  <div className="text-center text-white relative z-10">
-                    <motion.div 
-                      className="text-6xl mb-4"
-                      animate={{
-                        scale: [1, 1.1, 1],
-                        rotate: [0, 5, -5, 0]
-                      }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: 'easeInOut'
-                      }}
-                    >
-                      📱
-                    </motion.div>
-                    <p className="text-sm opacity-90">App Screenshot</p>
-                    <p className="text-xs opacity-75 mt-1">Coming Soon</p>
-                  </div>
                 </div>
               </motion.div>
 
